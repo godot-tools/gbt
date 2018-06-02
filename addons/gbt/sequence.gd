@@ -1,0 +1,17 @@
+"""
+Sequence is a Composite node that ticks children until one returns
+State.FAILED, State.RUNNING, or an Error.
+This node succeeds when ALL of its children return State.OK.
+"""
+
+extends "res://addons/gbt/btnode.gd"
+
+func tick(ctx):
+	var result = State.OK
+
+	for child in get_children():
+		result = child._execute(ctx)
+		if result != State.OK:
+			break
+
+	return result
