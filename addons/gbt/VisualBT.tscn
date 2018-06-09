@@ -1,46 +1,174 @@
-[gd_scene format=2]
+[gd_scene load_steps=9 format=2]
 
-[node name="Panel" type="Container" index="0"]
+[ext_resource path="res://addons/gbt/Blackboard.gd" type="Script" id=1]
+[ext_resource path="res://addons/gbt/NewNodeButton.gd" type="Script" id=2]
+[ext_resource path="res://addons/gbt/NewNodeSelectMenu.gd" type="Script" id=3]
+[ext_resource path="res://addons/gbt/CompositeSubMenu.gd" type="Script" id=4]
+[ext_resource path="res://addons/gbt/DecoratorSubMenu.gd" type="Script" id=5]
+[ext_resource path="res://addons/gbt/BTRoot.gd" type="Script" id=6]
+[ext_resource path="res://addons/gbt/ActorSlot.gd" type="Script" id=7]
+[ext_resource path="res://addons/gbt/ClearPopupMenu.gd" type="Script" id=8]
+
+[node name="Blackboard" type="GraphEdit" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 6.0
-margin_right = 1020.0
-margin_bottom = 598.0
+margin_left = 1.0
+margin_right = 1135.0
+margin_bottom = 635.0
+rect_min_size = Vector2( 0, 400 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Size Flags", "custom_styles" ]
-
-[node name="GraphEdit" type="GraphEdit" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 98.0
-margin_right = 1104.0
-margin_bottom = 578.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
 focus_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 right_disconnects = false
 scroll_offset = Vector2( 0, 0 )
 snap_distance = 20
 use_snap = true
 zoom = 1.0
-_sections_unfolded = [ "Size Flags" ]
+script = ExtResource( 1 )
+_sections_unfolded = [ "Focus", "Mouse", "Rect", "Size Flags", "custom_styles" ]
 
-[node name="GraphNode" type="GraphNode" parent="GraphEdit" index="1"]
+[node name="ButtonPane" type="HBoxContainer" parent="." index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 238.0
+margin_top = 11.0
+margin_right = 295.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+custom_constants/separation = 13
+alignment = 1
+_sections_unfolded = [ "Rect", "Size Flags", "custom_constants" ]
+
+[node name="NewNode" type="Button" parent="ButtonPane" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_right = 21.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "+"
+flat = false
+align = 1
+script = ExtResource( 2 )
+
+[node name="NewNodePopup" type="PopupMenu" parent="ButtonPane/NewNode" index="0"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 91.0
+margin_bottom = 70.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+items = [ "Composit", null, false, false, false, 0, 0, null, "CompositeSubMenu", false, "Decorator", null, false, false, false, 1, 0, null, "DecoratorSubMenu", false, "Leaf", null, false, false, false, 2, 0, null, "", false ]
+hide_on_state_item_selection = false
+script = ExtResource( 3 )
+_sections_unfolded = [ "Anchor" ]
+
+[node name="CompositeSubMenu" type="PopupMenu" parent="ButtonPane/NewNode/NewNodePopup" index="1"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+items = [ "Selector", null, false, false, false, 3, 0, null, "", false, "Sequence", null, false, false, false, 4, 0, null, "", false ]
+hide_on_state_item_selection = false
+script = ExtResource( 4 )
+
+[node name="DecoratorSubMenu" type="PopupMenu" parent="ButtonPane/NewNode/NewNodePopup" index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+items = [ "Inverter", null, false, false, false, 5, 0, null, "", false, "Repeater", null, false, false, false, 6, 0, null, "", false ]
+hide_on_state_item_selection = false
+script = ExtResource( 5 )
+
+[node name="RemoveNode" type="Button" parent="ButtonPane" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_right = 56.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "--"
+flat = false
+align = 1
+
+[node name="BehaviorTreeRoot" type="GraphNode" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -61,18 +189,19 @@ title = "BehaviorTree"
 offset = Vector2( 100, 100 )
 show_close = false
 resizable = false
-selected = true
+selected = false
 comment = false
-overlay = 2
+overlay = 0
 slot/0/left_enabled = false
 slot/0/left_type = 0
 slot/0/left_color = Color( 1, 1, 1, 1 )
 slot/0/right_enabled = true
 slot/0/right_type = 0
 slot/0/right_color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Mouse", "Size Flags", "slot", "slot/0" ]
+script = ExtResource( 6 )
+_sections_unfolded = [ "Mouse", "Rect", "Size Flags", "slot", "slot/0" ]
 
-[node name="Label" type="Label" parent="GraphEdit/GraphNode" index="0"]
+[node name="ActorSlot" type="Label" parent="BehaviorTreeRoot" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -84,7 +213,8 @@ margin_right = 121.0
 margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+focus_mode = 1
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -94,34 +224,17 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+script = ExtResource( 7 )
+_sections_unfolded = [ "Focus", "Mouse", "Pause", "Size Flags" ]
 
-[node name="ButtonPane" type="VBoxContainer" parent="." index="1"]
+[node name="PopupMenu" type="PopupMenu" parent="BehaviorTreeRoot/ActorSlot" index="0"]
 
-editor/display_folded = true
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 962.0
-margin_top = 27.0
-margin_right = 986.0
-margin_bottom = 73.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 8
-size_flags_vertical = 8
-alignment = 0
-_sections_unfolded = [ "Margin", "Size Flags" ]
-
-[node name="NewNode" type="Button" parent="ButtonPane" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 24.0
+margin_right = 20.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -130,36 +243,10 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "+"
-flat = false
-align = 1
-
-[node name="RemoveNode" type="Button" parent="ButtonPane" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 24.0
-margin_right = 24.0
-margin_bottom = 44.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "-"
-flat = false
-align = 1
+popup_exclusive = false
+items = [ "Clear", null, false, false, false, 0, 0, null, "", false ]
+hide_on_state_item_selection = false
+script = ExtResource( 8 )
+_sections_unfolded = [ "Popup" ]
 
 
