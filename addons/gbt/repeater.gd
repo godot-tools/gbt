@@ -10,8 +10,8 @@ func tick(ctx):
 		return Error.new(self, str("Repeater must have exactly one child. ", name, " has ", get_child_count(), "."))
 
 	var action = get_child(0)
-	var result = State.RUNNING	
-	while (not result is Error) and result != State.RUNNING:
+	var result = ERR_BUSY	
+	while (not result is Error) and result != ERR_BUSY:
 		result = action._execute(ctx)
 	
 	return result

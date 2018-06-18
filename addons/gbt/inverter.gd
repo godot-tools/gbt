@@ -10,13 +10,13 @@ func tick(ctx):
 
 	var result = get_child(0)._execute(ctx)
 	
-	if result is Error or result == State.RUNNING:
+	if result is Error or result == ERR_BUSY:
 		return result
 	
-	if result == State.OK:
-		return State.FAILED
+	if result == OK:
+		return FAILED
 	
-	if result == State.FAILED:
-		return State.OK
+	if result == FAILED:
+		return OK
 		
 	return Error.new(self, str("Invalid state: ", result))

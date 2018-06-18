@@ -10,7 +10,7 @@ func tick(ctx):
 		return Error.new(self, str("[ERR]: Succeeder must have exactly one child. ", name, " has ", get_child_count(), "."))
 
 	var result = get_child(0)._execute(ctx)
-	if result is Error or result == State.RUNNING:
+	if result is Error or result == ERR_BUSY:
 		return result
 	
-	return Status.OK
+	return OK

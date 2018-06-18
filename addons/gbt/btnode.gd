@@ -6,8 +6,6 @@ all nodes in a BheaviorTree, primarly Leaf nodes.
 
 extends Node
 
-const State = preload("res://addons/gbt/state.gd")
-
 const _KEY_IS_OPEN = "is_open"
 
 func enter(ctx):
@@ -37,7 +35,7 @@ func tick(ctx):
 
 	returns: the State for this tick (i.e. OK, FAILED, or RUNNING)
 	"""
-	return State.OK
+	return OK
 
 func close(ctx):
 	"""
@@ -63,7 +61,7 @@ func _execute(ctx):
 		_open(ctx)
 
 	var result = tick(ctx)
-	if result != State.RUNNING:
+	if result != ERR_BUSY:
 		_close(ctx)
 
 	exit(ctx)

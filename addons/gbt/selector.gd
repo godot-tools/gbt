@@ -7,11 +7,11 @@ ALL children return State.FAILED.
 extends "res://addons/gbt/btnode.gd"
 
 func tick(ctx):
-	var result = State.OK
+	var result = OK
 
 	for child in get_children():
 		result = child._execute(ctx)	
-		if result != State.FAILED:
+		if result != FAILED:
 			break
 
 	return result

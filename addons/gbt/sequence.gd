@@ -7,11 +7,11 @@ This node succeeds when ALL of its children return State.OK.
 extends "res://addons/gbt/btnode.gd"
 
 func tick(ctx):
-	var result = State.OK
+	var result = OK
 
 	for child in get_children():
 		result = child._execute(ctx)
-		if result != State.OK:
+		if result != OK:
 			break
 
 	return result

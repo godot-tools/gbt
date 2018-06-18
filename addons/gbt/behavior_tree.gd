@@ -1,6 +1,5 @@
 extends Node
 
-const State = preload("res://addons/gbt/state.gd")
 const Context = preload("res://addons/gbt/context.gd")
 const Error = preload("res://addons/gbt/error.gd")
 
@@ -11,7 +10,7 @@ func _ready():
 
 func tick(actor, blackboard):
 	var ctx = Context.new(self, actor, blackboard)
-	var result = State.FAILED
+	var result = FAILED
 	for child in get_children():
 		result = child._execute(actor)
 
