@@ -4,13 +4,15 @@ Inverter is a Decorator node that returns the netgation of its child's result.
 
 extends "res://addons/gbt/btnode.gd"
 
+const Error = preload("res://addons/gbt/error.gd")
+
 func tick(ctx):
 	if get_child_count() != 1:
 		return Error.new(self, str("[ERR]: Inverter must have exactly one child. ", name, " has ", get_child_count(), "."))
 
 	var result = get_child(0)._execute(ctx)
 	
-	if result is Error or result == ERR_BUSY:
+	if (typeof(result) == TYPE_OBJECT and result is Error) or result == ERR_BUSY:
 		return result
 	
 	if result == OK:

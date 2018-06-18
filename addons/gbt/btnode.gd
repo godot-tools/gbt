@@ -4,7 +4,7 @@ It is intended to be extended in custom scripts assigned to
 all nodes in a BheaviorTree, primarly Leaf nodes.
 """
 
-extends Node
+extends Node2D
 
 const _KEY_IS_OPEN = "is_open"
 
@@ -56,7 +56,7 @@ func exit(ctx):
 	pass
 
 func _execute(ctx):
-	enter(ctx)
+	_enter(ctx)
 	if !ctx.blackboard.get(_KEY_IS_OPEN, ctx.tree, self):
 		_open(ctx)
 
@@ -68,12 +68,15 @@ func _execute(ctx):
 
 	return result
 
+func _enter(ctx):
+	ctx._enter_node(self)
+	enter(ctx)
+
 func _open(ctx):
-	ctx.open_node(self)
 	ctx.blackboard.set(_KEY_IS_OPEN, true, ctx.tree, self)
 	open(ctx)
 
 func _close(ctx):
-	ctx.close_node(self)
+	ctx._close_node(self)
 	ctx.blackboard.set(_KEY_IS_OPEN, false, ctx.tree, self)
 	close(ctx)
